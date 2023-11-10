@@ -1,4 +1,6 @@
-namespace webapi;
+using TP9.Models;
+
+namespace TP9{
 public interface IUsuarioRepository
 {
     public List<Usuario> GetAll();
@@ -7,4 +9,5 @@ public interface IUsuarioRepository
     public void Remove(int id);
     public void Update(Usuario Usuarios,int id);
 
+}
 }
