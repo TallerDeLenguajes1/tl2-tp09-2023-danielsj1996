@@ -7,7 +7,7 @@ namespace TP9.Repositorios
     {
         private string cadenaConexion = "Data Source=DB/kanban.db;Cache=Shared";
 
-        public void Create(Usuario usuario)
+        public void CrearUsuario(Usuario usuario)
         {
             var query = "INSERT INTO usuarios (nombre_de_usuario) VALUES (@nombre_de_usuario)";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
@@ -23,7 +23,7 @@ namespace TP9.Repositorios
                 connection.Close();
             }
         }
-        public List<Usuario> GetAll()
+        public List<Usuario> TraerTodosLosUsuarios()
         {
             var query = "SELECT * FROM usuarios;";
             List<Usuario> usuarios = new List<Usuario>();
@@ -47,7 +47,7 @@ namespace TP9.Repositorios
             return usuarios;
         }
 
-        public Usuario GetById(int idusuario)
+        public Usuario TraerUsuariosPorId(int idusuario)
         {
             var query = "SELECT * FROM Usuarios WHERE id_usuario = @id_usuario";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
@@ -70,7 +70,7 @@ namespace TP9.Repositorios
         }
 
 
-        public void Remove(int id)
+        public void Eliminarusuario(int id)
         {
             var query = "DELETE FROM usuarios WHERE id= @idBuscado";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
@@ -85,7 +85,7 @@ namespace TP9.Repositorios
             }
 
         }
-        public void Update(Usuario usuario, int id)
+        public void ModificarUsuario(Usuario usuario, int id)
         {
             var query = "UPDATE usuarios SET nombre_de_usuario = @nombre_de_usuario WHERE id = @idBuscado";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))

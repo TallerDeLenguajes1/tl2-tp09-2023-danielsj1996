@@ -3,11 +3,11 @@ using TP9.Models;
 namespace TP9{
 public interface IUsuarioRepository
 {
-    public List<Usuario> GetAll();
-    public Usuario GetById(int id);
-    public void Create(Usuario usuarios);
-    public void Remove(int id);
-    public void Update(Usuario Usuarios,int id);
+    public void CrearUsuario(Usuario usuarios);
+    public List<Usuario> TraerTodosLosUsuarios();
+    public Usuario TraerUsuariosPorId(int id);
+    public void Eliminarusuario(int id);
+    public void ModificarUsuario(Usuario Usuarios,int id);
 
 }
 }

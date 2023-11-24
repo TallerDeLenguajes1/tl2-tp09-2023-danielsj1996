@@ -12,16 +12,20 @@ namespace TP9.Repositorios
         public Tarea CrearTarea(int idTablero, Tarea nuevaTarea)
 
         {
-            var query = "INSERT INTO Tarea (id_tablero,nombretNombreTarea_tarea,descripcion_tarea,estado_tarea)" +
-            "VALUES (@idTablero,@nombretNombreTareaTarea,@descripcionTarea,@estadoTarea);";
+            var query = "INSERT INTO Tarea (id_tablero, nombre_tarea, descripcion_tarea, estado_tarea, color_tarea, id_usuario_asignado) " +
+                        "VALUES (@idTablero, @nombreTarea, @descripcionTarea, @estadoTarea, @colorTarea, @idUsuarioA);";
 
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
                 var command = new SQLiteCommand(query, connection);
                 command.Parameters.Add(new SQLiteParameter("@idTablero", idTablero));
-                command.Parameters.Add(new SQLiteParameter("@nombretNombreTareaTarea", nuevaTarea.NombreTarea));
+                command.Parameters.Add(new SQLiteParameter("@nombreTarea", nuevaTarea.NombreTarea));
                 command.Parameters.Add(new SQLiteParameter("@descripcionTarea", nuevaTarea.DescripcionTarea));
+                command.Parameters.Add(new SQLiteParameter("@estadoTarea", nuevaTarea.Estado.ToString()));
+                command.Parameters.Add(new SQLiteParameter("@colorTarea", nuevaTarea.Color));
+                command.Parameters.Add(new SQLiteParameter("@idUsuarioAsignado", nuevaTarea.IdUsuarioAsignado));
+                command.ExecuteNonQuery();
                 connection.Close();
                 return nuevaTarea;
 
@@ -31,14 +35,18 @@ namespace TP9.Repositorios
 
         public Tarea ModificarTarea(int idTarea, Tarea tareaAModificar)
         {
-            var query = "UPDATE Tarea" + "SET nombretNombreTarea_tarea = @nombretNombreTareaTarea,descripcion_tarea=@descripcionTarea,estado_tarea=@estadoTarea" + "WHERE id_tarea= @idTarea;";
+                        var query = "UPDATE Tarea " +
+                        "SET nombre_tarea = @nombreTarea, descripcion_tarea = @descripcionTarea, estado_tarea = @estadoTarea, color_tarea = @colorTarea, id_usuario_asignado = @idUsuarioAsignado " +
+                        "WHERE id_tarea = @idTarea;";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
                 var command = new SQLiteCommand(query, connection);
-                command.Parameters.Add(new SQLiteParameter("@nombretNombreTareaTarea", tareaAModificar.NombreTarea));
+                command.Parameters.Add(new SQLiteParameter("@nombreTarea", tareaAModificar.NombreTarea));
                 command.Parameters.Add(new SQLiteParameter("@descripcionTarea", tareaAModificar.DescripcionTarea));
                 command.Parameters.Add(new SQLiteParameter("@estadoTarea", tareaAModificar.Estado.ToString()));
+                command.Parameters.Add(new SQLiteParameter("@colorTarea", tareaAModificar.Color));
+                command.Parameters.Add(new SQLiteParameter("@idUsuarioAsignado", tareaAModificar.IdUsuarioAsignado));
                 command.Parameters.Add(new SQLiteParameter("@idTarea", idTarea));
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -60,16 +68,14 @@ namespace TP9.Repositorios
                 {
                     if (reader.Read())
                     {
-                        var tarea = new Tarea
-                        {
-
-                            IdTarea = Convert.ToInt32(reader["id_tarea"]),
-                            IdTablero = Convert.ToInt32(reader["id_tablero"]),
-                            NombreTarea = reader["nombretNombreTarea_tarea"].ToString(),
-                            DescripcionTarea = reader["descripcion_tarea"].ToString(),
-                            Estado = (EstadoTarea)Enum.Parse(typeof(EstadoTarea),
-                            reader["estado_tarea"].ToString()),
-                        };
+                        var tarea = new Tarea();
+                        tarea.IdTarea = Convert.ToInt32(reader["id_tarea"]);
+                        tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
+                        tarea.NombreTarea = reader["nombre_tarea"].ToString();
+                        tarea.DescripcionTarea = reader["descripcion_tarea"].ToString();
+                        tarea.Color = reader["color_tarea"].ToString();
+                        tarea.Estado = (EstadoTarea)Enum.Parse(typeof(EstadoTarea), reader["estado_tarea"].ToString());
+                        tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
                         return tarea;
                     }
                 }
@@ -93,12 +99,14 @@ namespace TP9.Repositorios
                 {
                     while (reader.Read())
                     {
-                        var tarea = new Tarea
-                        {
-                            IdTarea = Convert.ToInt32(reader["id_tarea"]),
-                            NombreTarea = reader["nombre_tarea"].ToString(),
-                            DescripcionTarea = reader["descripcion_tarea"].ToString()
-                        };
+                        var tarea = new Tarea();
+                        tarea.IdTarea = Convert.ToInt32(reader["id_tarea"]);
+                        tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
+                        tarea.NombreTarea = reader["nombre_tarea"].ToString();
+                        tarea.DescripcionTarea = reader["descripcion_tarea"].ToString();
+                        tarea.Color = reader["color_tarea"].ToString();
+                        tarea.Estado = (EstadoTarea)Enum.Parse(typeof(EstadoTarea), reader["estado_tarea"].ToString());
+                        tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
                         listaDeTareas.Add(tarea);
                     }
                 }
@@ -122,16 +130,14 @@ namespace TP9.Repositorios
                 {
                     while (reader.Read())
                     {
-                        var tarea = new Tarea
-                        {
-
-                            IdTarea = Convert.ToInt32(reader["id_tarea"]),
-                            IdTablero = Convert.ToInt32(reader["id_tablero"]),
-                            NombreTarea = reader["nombre_tarea"].ToString(),
-                            DescripcionTarea = reader["descripcion_tarea"].ToString(),
-                            Estado = (EstadoTarea)Enum.Parse(typeof(EstadoTarea), reader["estado_tarea"].ToString())
-
-                        };
+                        var tarea = new Tarea();
+                        tarea.IdTarea = Convert.ToInt32(reader["id_tarea"]);
+                        tarea.IdTablero = Convert.ToInt32(reader["id_tablero"]);
+                        tarea.NombreTarea = reader["nombre_tarea"].ToString();
+                        tarea.DescripcionTarea = reader["descripcion_tarea"].ToString();
+                        tarea.Color = reader["color_tarea"].ToString();
+                        tarea.Estado = (EstadoTarea)Enum.Parse(typeof(EstadoTarea), reader["estado_tarea"].ToString());
+                        tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
                         listaDeTareas.Add(tarea);
                     }
                 }
@@ -156,14 +162,17 @@ namespace TP9.Repositorios
         public void AsignarUsuarioATarea(int idUsuario, int idTarea)
         {
 
-            var query = "INSERT INTO AsignacionTarea (id_usuario,id_tarea) VALUES (@idUsuario,@idTarea);";
+            var query = "UPDATE Tarea SET id_usuario_asignado = @idUsuario WHERE id_tarea=@idTarea;";
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {
                 connection.Open();
-                var command = new SQLiteCommand(query, connection);
-                command.Parameters.Add(new SQLiteParameter("@idUsuario", idUsuario));
-                command.Parameters.Add(new SQLiteParameter("@idTarea", idTarea));
-                command.ExecuteNonQuery();
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                {
+
+                    command.Parameters.Add(new SQLiteParameter("@idUsuario", idUsuario));
+                    command.Parameters.Add(new SQLiteParameter("@idTarea", idTarea));
+                    command.ExecuteNonQuery();
+                }
                 connection.Close();
             }
         }
