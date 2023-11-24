@@ -1,4 +1,4 @@
-namespace TP9.Models
+namespace tl2_tp09_2023_danielsj1996.Models
 {
 
 

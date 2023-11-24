@@ -4,17 +4,20 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>tl2_tp09_2023_danielsj1996</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.11" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
-    <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
-  </ItemGroup>
- <ItemGroup>
-    <None Update="db\kanvas.db">
+ 
+    <None Update="DB\kanban.db">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
-using TP9.Models;
+using tl2_tp09_2023_danielsj1996.Models;
 
-namespace TP9
+namespace tl2_tp09_2023_danielsj1996
 {
     public interface ITableroRepository
     {

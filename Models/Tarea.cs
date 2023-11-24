@@ -1,31 +1,32 @@
-namespace TP9.Models
+namespace tl2_tp09_2023_danielsj1996.Models
 {
-    enum EstadoTarea
+    public enum EstadoTarea
     {
-        Ideas, ToDo, Doing, Review, Done
+        Ideas,
+        ToDo, //hacer
+        Doing, //haciendo
+        Review, //revisar
+        Done //hecho
     }
+
     public class Tarea
     {
         private int idTarea;
-        private int idTablero;
-        private string? nombreTarea;
+        private int idTablero;  // Agregar el campo idTablero
+        private string nombreTarea;
         private string? descripcionTarea;
         private string? color;
-        private EstadoTarea estado;
+        private EstadoTarea estadoTarea;
         private int? idUsuarioAsignado;
 
+
         public int IdTarea { get => idTarea; set => idTarea = value; }
-        public string? NombreTarea { get => nombreTarea; set => nombreTarea = value; }
+        public int IdTablero { get => idTablero; set => idTablero = value; } // Propiedad para el idTablero
+        public string NombreTarea { get => nombreTarea; set => nombreTarea = value; }
+
+        public EstadoTarea EstadoTarea { get => estadoTarea; set => estadoTarea = value; }
+        public int? IdUsuarioAsignado { get => idUsuarioAsignado; set => idUsuarioAsignado = value; }
         public string? DescripcionTarea { get => descripcionTarea; set => descripcionTarea = value; }
         public string? Color { get => color; set => color = value; }
-        public int? IdUsuarioAsignado { get => idUsuarioAsignado; set => idUsuarioAsignado = value; }
-        internal EstadoTarea Estado { get => estado; set => estado = value; }
-        public int IdTablero { get => idTablero; set => idTablero = value; }
-
-        public Tarea(){
-
-        estado=EstadoTarea.Ideas;
-    }
-    
     }
 }

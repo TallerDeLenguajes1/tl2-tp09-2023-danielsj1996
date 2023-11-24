@@ -1,7 +1,7 @@
 using System.Data.SQLite;
-using TP9.Models;
+using tl2_tp09_2023_danielsj1996.Models;
 
-namespace TP9.Repositorios
+namespace tl2_tp09_2023_danielsj1996.Repositorios
 {
     public class TableroRepository : ITableroRepository
     {
@@ -43,7 +43,7 @@ namespace TP9.Repositorios
         }
         public List<Tablero> MostrarTableroPorIdDeUsuario(int idusuario)
         {
-            var query = "SELECT * FROM Usuarios WHERE id_usuario_propietario = @id_usuario";
+            var query = "SELECT * FROM Usuario WHERE id_usuario_propietario = @id_usuario";
             List<Tablero> tableros = new List<Tablero>();
             using (SQLiteConnection connection = new SQLiteConnection(cadenaConexion))
             {

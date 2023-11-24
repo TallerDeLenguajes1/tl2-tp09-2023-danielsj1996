@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using TP9.Models;
+using tl2_tp09_2023_danielsj1996.Models;
 
-namespace TP9.Repositorios
+namespace tl2_tp09_2023_danielsj1996.Repositorios
 {
     public class TareaRepository
     {
@@ -22,7 +22,7 @@ namespace TP9.Repositorios
                 command.Parameters.Add(new SQLiteParameter("@idTablero", idTablero));
                 command.Parameters.Add(new SQLiteParameter("@nombreTarea", nuevaTarea.NombreTarea));
                 command.Parameters.Add(new SQLiteParameter("@descripcionTarea", nuevaTarea.DescripcionTarea));
-                command.Parameters.Add(new SQLiteParameter("@estadoTarea", nuevaTarea.Estado.ToString()));
+                command.Parameters.Add(new SQLiteParameter("@estadoTarea", nuevaTarea.EstadoTarea.ToString()));
                 command.Parameters.Add(new SQLiteParameter("@colorTarea", nuevaTarea.Color));
                 command.Parameters.Add(new SQLiteParameter("@idUsuarioAsignado", nuevaTarea.IdUsuarioAsignado));
                 command.ExecuteNonQuery();
@@ -44,7 +44,7 @@ namespace TP9.Repositorios
                 var command = new SQLiteCommand(query, connection);
                 command.Parameters.Add(new SQLiteParameter("@nombreTarea", tareaAModificar.NombreTarea));
                 command.Parameters.Add(new SQLiteParameter("@descripcionTarea", tareaAModificar.DescripcionTarea));
-                command.Parameters.Add(new SQLiteParameter("@estadoTarea", tareaAModificar.Estado.ToString()));
+                command.Parameters.Add(new SQLiteParameter("@estadoTarea", tareaAModificar.EstadoTarea.ToString()));
                 command.Parameters.Add(new SQLiteParameter("@colorTarea", tareaAModificar.Color));
                 command.Parameters.Add(new SQLiteParameter("@idUsuarioAsignado", tareaAModificar.IdUsuarioAsignado));
                 command.Parameters.Add(new SQLiteParameter("@idTarea", idTarea));
@@ -74,7 +74,7 @@ namespace TP9.Repositorios
                         tarea.NombreTarea = reader["nombre_tarea"].ToString();
                         tarea.DescripcionTarea = reader["descripcion_tarea"].ToString();
                         tarea.Color = reader["color_tarea"].ToString();
-                        tarea.Estado = (EstadoTarea)Enum.Parse(typeof(EstadoTarea), reader["estado_tarea"].ToString());
+                        tarea.EstadoTarea = (EstadoTarea)Enum.Parse(typeof(EstadoTarea), reader["estado_tarea"].ToString());
                         tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
                         return tarea;
                     }
@@ -105,7 +105,7 @@ namespace TP9.Repositorios
                         tarea.NombreTarea = reader["nombre_tarea"].ToString();
                         tarea.DescripcionTarea = reader["descripcion_tarea"].ToString();
                         tarea.Color = reader["color_tarea"].ToString();
-                        tarea.Estado = (EstadoTarea)Enum.Parse(typeof(EstadoTarea), reader["estado_tarea"].ToString());
+                        tarea.EstadoTarea = (EstadoTarea)Enum.Parse(typeof(EstadoTarea), reader["estado_tarea"].ToString());
                         tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
                         listaDeTareas.Add(tarea);
                     }
@@ -136,7 +136,7 @@ namespace TP9.Repositorios
                         tarea.NombreTarea = reader["nombre_tarea"].ToString();
                         tarea.DescripcionTarea = reader["descripcion_tarea"].ToString();
                         tarea.Color = reader["color_tarea"].ToString();
-                        tarea.Estado = (EstadoTarea)Enum.Parse(typeof(EstadoTarea), reader["estado_tarea"].ToString());
+                        tarea.EstadoTarea = (EstadoTarea)Enum.Parse(typeof(EstadoTarea), reader["estado_tarea"].ToString());
                         tarea.IdUsuarioAsignado = Convert.ToInt32(reader["id_usuario_asignado"]);
                         listaDeTareas.Add(tarea);
                     }
